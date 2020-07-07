@@ -1058,7 +1058,13 @@ function install_mongodb()
 {
   echo -ne "${COLOR_PRINT_YELLOW}Installing MongoDB${END_COLOR_PRINT}"
   cd "${XCASH_DPOPS_INSTALLATION_DIR}"
-  wget -q ${MONGODB_URL}
+  
+  if [ -f ${MONGODB_LATEST_VERSION} ];then
+      echo file ${MONGODB_LATEST_VERSION} exist!
+  else
+      wget -q ${MONGODB_URL}
+  fi
+  
   tar -xf mongodb-linux-x86_64-*.tgz &>/dev/null
   sudo rm mongodb-linux-x86_64-*.tgz &>/dev/null
   echo -ne "\nexport PATH=${MONGODB_DIR}bin:" >> "${HOME}"/.profile 
